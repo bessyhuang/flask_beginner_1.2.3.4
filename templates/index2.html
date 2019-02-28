@@ -1,0 +1,17 @@
+{% extends 'base2_bootstrap.html' %}
+
+{% block title %}
+INDEX
+{% endblock %}
+
+
+{% block content %}
+	{{ super() }}
+	<h1>Hello World!</h1>
+	<p>先繼承 bootstrap/base.html Bootstrap模板，接著繼承 自訂模板 base2_bootstrap.html</p>
+
+	<h2>The local date and time is {{ moment(current_time).format('LLL') }}</h2>
+	<h2>That was {{ moment(current_time).fromNow(refresh=True) }}
+	</h2>
+{% endblock %}
+	

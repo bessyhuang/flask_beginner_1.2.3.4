@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<style type="text/css">
+		#my-text-field {
+			color: red;
+			padding:5px 15px; 
+			border:2px black solid;
+			cursor:pointer;
+		}
+	</style>
+</head>
+<body>
+	<form method="POST">
+		<h1>LAB-1 Web Form</h1>
+		{{ form.hidden_tag() }}
+		{{ form.name.label }}<br><br>{{ form.name(id='my-text-field') }}
+		{{ form.submit() }}
+	</form>
+	<br>
+	<br>
+	<a href="https://www.w3schools.com/w3css/w3css_input.asp">W3.CSS Input</a>
+	<br>
+	<a href="https://pjchender.blogspot.com/2015/04/htmlinputcss.html">[筆記] 將HTML中的INPUT標籤套用CSS樣式</a>
+
+</body>
+</html>
