@@ -1,62 +1,25 @@
-{% extends "base_index.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+{% extends 'base_webform.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
-{% block title %}webform{% endblock %}
-{% block head %}
-    {{ super() }}
+{% block title %}
+WEBFORM 3
 {% endblock %}
+
+{% block head %}
+{{ super()}}
+{% endblock %}
+
 
 {% block page_content %}
-<div class="page_header">
-    <h1>Hello, 
-    {% if name %}
-        {{ name }}
-    {% else %}
-        Stranger
-    {% endif %}!</h1>
-
-	{% if not known %}
-	<p>Pleased to meet you!</p>
-	{% else %}
-	<p>Happy to see you again!</p>
-	{% endif %}
-</div>
-    {{ wtf.quick_form(form) }}
+	<div class="page-header">
+		<h1>Hello, 
+			{% if name %}
+				{{ name }}
+			{% else %}
+				Stranger
+			{% endif %}
+		!</h1>
+	</div>
+	{{ wtf.quick_form(form) }}
 {% endblock %}
-
-{% block content %}
-
-{{ super() }}
-<div class="container">
-	<!-- Modal -->
-	<hr>
-  	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Current Time</button>
-	<hr>
-  	<p>The local date and time is {{ moment(current_time).format('LLL') }}.</p>
-	<p>That was {{ moment(current_time).fromNow(refresh=True) }}</p>
-</div>
-
-<!-- Button trigger modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Current Time</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>The local date and time is {{ moment(current_time).format('LLL') }}.</p>
-		<p>That was {{ moment(current_time).fromNow(refresh=True) }}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        
-      </div>
-    </div>
-  </div>
-</div>
 	
-	
-{% endblock %}
