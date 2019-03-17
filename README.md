@@ -6,3 +6,6 @@ Flask 網頁開發 第二版 (練習：05資料庫-SQLAlchemy)
 
 # flask_beginner_6
 Flask 網頁開發 第二版 (練習：06Email-Gmail帳戶)
+
+# flask_beginner_7
+Flask 網頁開發 第二版 (練習：07大型APP結構)
