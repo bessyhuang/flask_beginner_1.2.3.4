@@ -6,6 +6,8 @@ Flask 網頁開發 第二版 (練習：01安裝、02基本app結構、03模板�
 
 > Flask 網頁開發 第二版 (練習：05資料庫-mariadb連接db_demo.py 與 flask shell操作 --- 尚未連結 webform.html)
 
+> Flask 網頁開發 第二版 (練習：05資料庫-mariadb連接db_demo.py 與 webform.html --- 已連結 webform.html)
+
 # flask_beginner_6
 Flask 網頁開發 第二版 (練習：06Email-Gmail帳戶)
 
