@@ -2,7 +2,7 @@
 Flask 網頁開發 第二版 (練習：01安裝、02基本app結構、03模板、04 web 表單)
 
 # flask_beginner_5
-> Flask 網頁開發 第二版 (練習：05資料庫-SQLAlchemy)
+> Flask 網頁開發 第二版 (練習：05資料庫-SQLAlchemy資料庫框架 --- 裡面沒有資料庫)
 
 > Flask 網頁開發 第二版 (練習：05資料庫-mariadb連接db_demo.py 與 flask shell操作 --- 尚未連結 webform.html)
 
