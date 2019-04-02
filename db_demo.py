@@ -33,27 +33,31 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # 減少記憶體使用
 
 app.config['SECRET_KEY'] = 'hard to guess string 12345'
 
+### 設置Flask-Mail來使用Gmail ###
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME') #郵件帳號的使用者名稱(於 Windows cmd 設定環境變數)
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD') #郵件帳號的密碼(於 Windows cmd 設定環境變數)
 
+#主旨的開頭文字
 app.config['MAIL_SUBJECT_PREFIX'] = '[Flasky]'
+#寄件者的地址，同欲驗證的gmail帳號
 app.config['MAIL_SENDER'] = 'Flasky Admin <pcsh110576@gmail.com>'
+#收件者的地址(於 Windows cmd 設定環境變數)
 app.config['MAIL_ADMIN'] = os.environ.get('FLASKY_ADMIN')
 
 def send_email(to, subject, template, **kwargs):
-	msg = Message(app.config['MAIL_SUBJECT_PREFIX'] + subject, sender = app.config['MAIL_SENDER'], recipients=[to])
-	msg.body = render_template(template + '.txt', **kwargs)
-	#msg.html = render_template(template + '.html', **kwargs)
-	thr = Thread(target=send_async_email, args=[app, msg])
-	thr.start()
-	return thr
+    msg = Message(app.config['MAIL_SUBJECT_PREFIX'] + subject, sender = app.config['MAIL_SENDER'], recipients=[to])
+    msg.body = render_template(template + '.txt', **kwargs)
+    #msg.html = render_template(template + '.html', **kwargs)
+    thr = Thread(target=send_async_email, args=[app, msg])
+    thr.start()
+    return thr
 
 def send_async_email(app, msg):
-	with app.app_context():
-		mail.send(msg)
+    with app.app_context():
+        mail.send(msg)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db) #用Flask-Migrate進行資料庫遷移
@@ -100,10 +104,10 @@ def name_form():
         if user is None:
             user = User(username=form.name.data)
             db.session.add(user)
-            db.session.commit()
+            db.session.commit() #把表單所輸入的，寫進資料庫
             session['known'] = False
-            if app.config['MAIL_ADMIN']: ###
-                send_email(app.config['MAIL_ADMIN'], 'New User', 'mail/new_user', user=user) ###
+            if app.config['MAIL_ADMIN']: 							###
+                send_email(app.config['MAIL_ADMIN'], 'New User', 'mail/new_user', user=user) 	###
         else:
             session['known'] = True
         session['name'] = form.name.data
