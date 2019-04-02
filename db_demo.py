@@ -21,6 +21,7 @@ from datetime import datetime
 import os
 from flask_mail import Mail
 from flask_mail import Message
+from threading import Thread
 
 app = Flask(__name__)
 
@@ -43,10 +44,16 @@ app.config['MAIL_SENDER'] = 'Flasky Admin <pcsh110576@gmail.com>'
 app.config['MAIL_ADMIN'] = os.environ.get('FLASKY_ADMIN')
 
 def send_email(to, subject, template, **kwargs):
-    msg = Message(app.config['MAIL_SUBJECT_PREFIX'] + subject, sender = app.config['MAIL_SENDER'], recipients=[to])
-    #msg.body = render_template(template + '.txt', **kwargs)
-    msg.html = render_template(template + '.html', **kwargs)
-    mail.send(msg)
+	msg = Message(app.config['MAIL_SUBJECT_PREFIX'] + subject, sender = app.config['MAIL_SENDER'], recipients=[to])
+	msg.body = render_template(template + '.txt', **kwargs)
+	#msg.html = render_template(template + '.html', **kwargs)
+	thr = Thread(target=send_async_email, args=[app, msg])
+	thr.start()
+	return thr
+
+def send_async_email(app, msg):
+	with app.app_context():
+		mail.send(msg)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db) #用Flask-Migrate進行資料庫遷移
