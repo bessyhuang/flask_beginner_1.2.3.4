@@ -18,6 +18,9 @@ from flask import flash
 from flask_moment import Moment
 from datetime import datetime
 
+import os
+from flask_mail import Mail
+
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://flaskdb_chia:gibe258deny700@localhost:3306/flaskdb'
@@ -28,11 +31,19 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # 減少記憶體使用
 
 app.config['SECRET_KEY'] = 'hard to guess string 12345'
 
+app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+
 db = SQLAlchemy(app)
 migrate = Migrate(app, db) #用Flask-Migrate進行資料庫遷移
 
 bootstrap = Bootstrap(app)
 moment = Moment(app)
+
+mail = Mail(app)
 
 
 class Role(db.Model):
