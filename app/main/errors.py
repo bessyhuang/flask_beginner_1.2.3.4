@@ -1,7 +1,9 @@
 from flask import render_template
 from . import main
 
-@main.app_errorhandler(404)
+# 全域(app_errorhandler裝飾器)的錯誤處理函式 #
+
+@main.app_errorhandler(404)    #路由裝飾器來自藍圖(main.route)
 def page_not_found(e):
     return render_template('404.html'), 404
     
