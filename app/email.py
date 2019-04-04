@@ -3,6 +3,7 @@ from flask_mail import Message
 from flask import current_app, render_template
 from . import mail
 
+#send_email(收件人地址, 主旨, email內文模板, 關鍵字引數)
 def send_email(to, subject, template, **kwargs):
     app = current_app._get_current_object()
 
