@@ -2,12 +2,14 @@ from datetime import datetime
 from flask import flash
 from flask import render_template, session, redirect, url_for
 from . import main
-from .forms import NameForm
+from .forms import NameForm #表單物件
 from .. import db
 from ..models import User
 
 from flask import current_app
 from ..email import send_email
+
+#路由裝飾器來自藍圖(main.route)
 
 @main.route('/name_form', methods=['GET', 'POST'])
 def name_form():
@@ -32,6 +34,7 @@ def name_form():
         old_name = session.get('name')
         if old_name is not None and old_name != form.name.data:
             flash('Looks like you have changed your name!')
-        
-        return redirect(url_for('main.name_form')) #return redirect(url_for('.name_form'))
+            
+        # 將命名空間套用到在藍圖中所定義的所有端點
+        return redirect(url_for('main.name_form')) #等同於 '.name_form'
     return render_template('webform.html', form=form, name=session.get('name'), current_time=datetime.utcnow(), known=session.get('known', False))
