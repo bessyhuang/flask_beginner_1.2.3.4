@@ -22,5 +22,5 @@ def make_shell_context():
 def test():
     """Run the unit tests."""
     import unittest
-    tests = unittest.TestLoader().discover('tests')
+    tests = unittest.TestLoader().discover('tests')  # tests 資料夾
     unittest.TextTestRunner(verbosity=2).run(tests)
