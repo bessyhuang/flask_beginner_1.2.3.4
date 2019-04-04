@@ -1,3 +1,4 @@
+#當你要同時做很多事情時，就可以用到threading達成多執行緒。
 from threading import Thread
 from flask_mail import Message
 from flask import current_app, render_template
